@@ -4,9 +4,10 @@ import com.crud.entity.UserLogin;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 public interface UserLoginService {
-    Optional<UserLogin> findUserByDi(BigDecimal di);
+    ResponseEntity<Object> findUserByDi(BigDecimal di);
     ResponseEntity<Object> save (UserLogin user);
+    ResponseEntity<Object> updateUser (UserLogin user);
+    ResponseEntity<Object> delete(BigDecimal di);
 }

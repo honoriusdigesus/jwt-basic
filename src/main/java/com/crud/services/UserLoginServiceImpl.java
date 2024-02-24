@@ -19,15 +19,16 @@ public class UserLoginServiceImpl implements UserLoginService{
 
 
     @Override
-    public Optional<UserLogin> findUserByDi(BigDecimal di) {
+    public ResponseEntity<Object> findUserByDi(BigDecimal di) {
         Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(di);
         dates = new HashMap<>();
         if (userLogin.isPresent()) {
             dates.put("SEARCH", "User found");
-            return userLogin;
+            //return userLogin;
+            return new ResponseEntity<>(userLogin, HttpStatus.OK);
         }
         dates.put("SEARCH", "User no found");
-        return Optional.empty();
+        return new ResponseEntity<>(dates , HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -41,5 +42,32 @@ public class UserLoginServiceImpl implements UserLoginService{
         userLoginRepository.save(user);
         dates.put("SAVED", "Saved user");
         return new ResponseEntity<>(dates, HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<Object> updateUser(UserLogin user) {
+        Optional<UserLogin> userResult = userLoginRepository.findUserByDi(user.getDi());
+        dates = new HashMap<>();
+        if (userResult.isPresent()) {
+            userLoginRepository.save(user);
+            dates.put("UPDATE", "User successfully updated");
+            return new ResponseEntity<>(dates , HttpStatus.CREATED);
+        }
+        dates.put("UPDATE ERROR", "The user could not be updated successfully");
+        return new ResponseEntity<>(dates, HttpStatus.CONFLICT);
+    }
+
+    @Override
+    public ResponseEntity<Object> delete(BigDecimal di) {
+        Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(di);
+        dates = new HashMap<>();
+        if (userLogin.isPresent()) {
+            userLoginRepository.deleteById(userLogin.get().getId());
+            dates.put("DELETE", "User successfully deleted");
+            //return userLogin;
+            return new ResponseEntity<>(dates, HttpStatus.ACCEPTED);
+        }
+        dates.put("DELETE", "The user is not registered");
+        return new ResponseEntity<>(dates , HttpStatus.NOT_FOUND);
     }
 }

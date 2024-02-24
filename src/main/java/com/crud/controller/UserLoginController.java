@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -16,12 +15,22 @@ public class UserLoginController {
     private UserLoginService userLoginService;
 
     @GetMapping("/{di}")
-    public Optional<UserLogin> findUserByDi(@PathVariable BigDecimal di) {
-        return ResponseEntity.ok(userLoginService.findUserByDi(di)).getBody();
+    public ResponseEntity<Object> findUserByDi(@PathVariable BigDecimal di) {
+        return ResponseEntity.ok(userLoginService.findUserByDi(di));
     }
 
     @PostMapping
-    public ResponseEntity<Object> save(@RequestBody UserLogin userLogin){
+    public ResponseEntity<Object> save(@RequestBody UserLogin userLogin) {
         return ResponseEntity.ok(userLoginService.save(userLogin));
+    }
+
+    @PutMapping
+    public ResponseEntity<Object> update(@RequestBody UserLogin userLogin) {
+        return ResponseEntity.ok(userLoginService.updateUser(userLogin));
+    }
+
+    @DeleteMapping("/{di}")
+    public ResponseEntity<Object> delete(@PathVariable BigDecimal di) {
+        return ResponseEntity.ok(userLoginService.delete(di));
     }
 }
