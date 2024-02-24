@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class UserLoginServiceImpl implements UserLoginService{
 
 
     @Override
-    public ResponseEntity<Object> findUserByDi(BigDecimal di) {
+    public ResponseEntity<Object> findUserByDi(BigInteger di) {
         Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(di);
         dates = new HashMap<>();
         if (userLogin.isPresent()) {
@@ -58,7 +59,7 @@ public class UserLoginServiceImpl implements UserLoginService{
     }
 
     @Override
-    public ResponseEntity<Object> delete(BigDecimal di) {
+    public ResponseEntity<Object> delete(BigInteger di) {
         Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(di);
         dates = new HashMap<>();
         if (userLogin.isPresent()) {

@@ -1,14 +1,12 @@
 package com.crud.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 @Entity
 @Table
@@ -18,8 +16,10 @@ import java.math.BigDecimal;
 public class UserLogin {
     @Id
     @GeneratedValue
+    @Column(unique = true)
     private Integer id;
-    private BigDecimal di;
+    @Column(unique = true)
+    private BigInteger di;
     private String name;
     private String lastname;
     private String email;
