@@ -1,23 +1,14 @@
-package com.crud.entity;
+package com.crud.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
-@Entity
-@Table
 @Data
-public class UserLogin {
-    @Id
-    @GeneratedValue
-    @Column(unique = true)
+public class UserLoginDTO {
     private Integer id;
-    @Column(unique = true)
     private BigInteger di;
     private String name;
     private String lastname;

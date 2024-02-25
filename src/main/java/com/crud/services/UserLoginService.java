@@ -11,4 +11,5 @@ public interface UserLoginService {
     ResponseEntity<Object> save (UserLogin user);
     ResponseEntity<Object> updateUser (UserLogin user);
     ResponseEntity<Object> delete(BigInteger di);
+
 }
