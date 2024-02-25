@@ -20,8 +20,6 @@ public class UserLoginServiceImpl implements UserLoginService{
     private UserLoginMapper userLoginMapper;
     HashMap<String, Object> dates;
 
-
-
     @Override
     public ResponseEntity<Object> findUserByDi(BigInteger di) {
         Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(di);
@@ -35,16 +33,8 @@ public class UserLoginServiceImpl implements UserLoginService{
     }
 
     @Override
-    public ResponseEntity<Object> save(UserLogin user) {
-        Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(user.getDi());
-        dates = new HashMap<>();
-        if (userLogin.isPresent()) {
-            dates.put("SAVE ERROR", "Error saving, user already exists");
-            return new ResponseEntity<>(dates , HttpStatus.CONFLICT);
-        }
-        userLoginRepository.save(user);
-        dates.put("SAVED", "Saved user");
-        return new ResponseEntity<>(dates, HttpStatus.CREATED);
+    public UserLogin save(UserLogin user) {
+        return userLoginRepository.save(user);
     }
 
     @Override
@@ -67,11 +57,15 @@ public class UserLoginServiceImpl implements UserLoginService{
         if (userLogin.isPresent()) {
             userLoginRepository.deleteById(userLogin.get().getId());
             dates.put("DELETE", "User successfully deleted");
-            //return userLogin;
             return new ResponseEntity<>(dates, HttpStatus.ACCEPTED);
         }
         dates.put("DELETE", "The user is not registered");
         return new ResponseEntity<>(dates , HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return userLoginRepository.existsByEmail(email);
     }
 
 }

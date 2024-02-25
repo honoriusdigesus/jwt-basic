@@ -9,4 +9,5 @@ import java.util.Optional;
 
 public interface UserLoginRepository extends JpaRepository<UserLogin, Integer> {
     Optional<UserLogin> findUserByDi(BigInteger di);
+    boolean existsByEmail(String email);
 }

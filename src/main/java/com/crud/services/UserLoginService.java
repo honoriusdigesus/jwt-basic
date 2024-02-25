@@ -8,8 +8,10 @@ import java.math.BigInteger;
 
 public interface UserLoginService {
     ResponseEntity<Object> findUserByDi(BigInteger di);
-    ResponseEntity<Object> save (UserLogin user);
+    UserLogin save (UserLogin user);
     ResponseEntity<Object> updateUser (UserLogin user);
     ResponseEntity<Object> delete(BigInteger di);
+
+    boolean existByEmail(String email);
 
 }
