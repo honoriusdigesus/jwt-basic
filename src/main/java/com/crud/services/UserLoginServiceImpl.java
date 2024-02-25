@@ -2,6 +2,7 @@ package com.crud.services;
 
 import com.crud.dto.UserLoginDTO;
 import com.crud.entity.UserLogin;
+import com.crud.mapper.UserLoginMapper;
 import com.crud.repository.UserLoginRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,27 +17,18 @@ import java.util.Optional;
 public class UserLoginServiceImpl implements UserLoginService{
 
     private UserLoginRepository userLoginRepository;
+    private UserLoginMapper userLoginMapper;
     HashMap<String, Object> dates;
+
 
 
     @Override
     public ResponseEntity<Object> findUserByDi(BigInteger di) {
         Optional<UserLogin> userLogin = userLoginRepository.findUserByDi(di);
-        UserLoginDTO userLoginDTO = new UserLoginDTO();
         dates = new HashMap<>();
         if (userLogin.isPresent()) {
             dates.put("SEARCH", "User found");
-
-            userLoginDTO.setId(userLogin.get().getId());
-            userLoginDTO.setDi(userLogin.get().getDi());
-            userLoginDTO.setName(userLogin.get().getName());
-            userLoginDTO.setLastname(userLogin.get().getLastname());
-            userLoginDTO.setEmail(userLogin.get().getEmail());
-            userLoginDTO.setPassword(userLogin.get().getPassword());
-            userLoginDTO.setRol(userLogin.get().getRol());
-            userLoginDTO.setActive(userLogin.get().getActive());
-
-            return new ResponseEntity<>(userLoginDTO, HttpStatus.OK);
+            return new ResponseEntity<>(userLoginMapper.convertToUserDTO(userLogin), HttpStatus.OK);
         }
         dates.put("SEARCH", "User no found");
         return new ResponseEntity<>(dates , HttpStatus.NOT_FOUND);
