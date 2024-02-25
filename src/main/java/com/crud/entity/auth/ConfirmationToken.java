@@ -35,6 +35,9 @@ public class ConfirmationToken {
     @ManyToOne
     @JoinColumn(name = "user_login_id")
     private UserLogin userLogin;
-
-
 }
+
+//Contraseña de la aplicación de google
+//Usuario: no.reply.token.jwt@gmail.com
+//Password: alzh yely uizf rcop
+
