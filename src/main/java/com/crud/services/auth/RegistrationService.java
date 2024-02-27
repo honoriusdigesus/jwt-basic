@@ -66,6 +66,6 @@ public class RegistrationService {
         }
         userLoginService.enableUser(confirmationToken.getUserLogin());
         confirmationTokenService.setConfirmesAt(confirmationToken);
-        return "User confirmed successfully with token: "+confirmationToken.getToken().toString();
+        return "Hello "+ confirmationToken.getUserLogin().getName() + "! your account has been successfully confirmed";
     }
 }
