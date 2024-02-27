@@ -53,7 +53,7 @@ public class TemplateGenerator {
                 "    <div class=\"container\">\n" +
                 "        <div class=\"card\">\n" +
                 "            <h1>Hello, "+ name + "!</h1>\n" +
-                "            <p>Please confirm your account by clicking the button below:</p>\n" +
+                "            <p>Por favor confirme su cuenta haciendo clic en el botón siguiente botón:</p>\n" +
                 "            <a class=\"button\" href=\" " + url +"\">Confirm Account</a>\n" +
                 "        </div>\n" +
                 "    </div>\n" +

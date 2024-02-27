@@ -68,4 +68,10 @@ public class UserLoginServiceImpl implements UserLoginService{
         return userLoginRepository.existsByEmail(email);
     }
 
+    @Override
+    public void enableUser(UserLogin user) {
+        user.setActive(true);
+        userLoginRepository.save(user);
+    }
+
 }

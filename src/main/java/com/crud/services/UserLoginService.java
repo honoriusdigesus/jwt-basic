@@ -13,5 +13,6 @@ public interface UserLoginService {
     ResponseEntity<Object> delete(BigInteger di);
 
     boolean existByEmail(String email);
+    void enableUser(UserLogin user);
 
 }

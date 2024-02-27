@@ -55,4 +55,17 @@ public class RegistrationService {
         confirmationTokenService.save(confirmationToken);
         return "User registered successfully with ID: " + userSaved.getId();
     }
+
+    public String confirm(String token) {
+        ConfirmationToken confirmationToken = confirmationTokenService.findByToken(token);
+        if(confirmationToken.getConfirmedAt() != null) {
+            throw new IllegalStateException("Token is already confirmed");
+        }
+        if(confirmationToken.getExpiredAt().isBefore(LocalDateTime.now())){
+            throw new IllegalStateException("Token expired");
+        }
+        userLoginService.enableUser(confirmationToken.getUserLogin());
+        confirmationTokenService.setConfirmesAt(confirmationToken);
+        return "User confirmed successfully with token: "+confirmationToken.getToken().toString();
+    }
 }

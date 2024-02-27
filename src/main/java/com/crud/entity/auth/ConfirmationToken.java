@@ -2,14 +2,13 @@ package com.crud.entity.auth;
 
 import com.crud.entity.UserLogin;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table
 @AllArgsConstructor
 @NoArgsConstructor
